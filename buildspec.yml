@@ -18,4 +18,5 @@ phases:
       - echo Completed build at `date`
       - echo Pushing the Docker image...
       - docker push 448049813954.dkr.ecr.us-east-1.amazonaws.com/cdk-hnb659fds-container-assets-448049813954-us-east-1:$CODEBUILD_BUILD_NUMBER
+      - aws ecr batch-delete-image --repository-name cdk-hnb659fds-container-assets-448049813954-us-east-1 --image-ids imageTag=latest --region us-east-1
       - docker push 448049813954.dkr.ecr.us-east-1.amazonaws.com/cdk-hnb659fds-container-assets-448049813954-us-east-1:latest
