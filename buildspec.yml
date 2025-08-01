@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging into ECR
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 448049813954.dkr.ecr.us-east-1.amazonaws.com
+  build:
+    commands:
+      - echo Starting build at `date`
+      - echo Building the Docker image...
+      - docker build -t cdk-hnb659fds-container-assets-448049813954-us-east-1:$CODEBUILD_BUILD_NUMBER analytics/.
+      - docker tag cdk-hnb659fds-container-assets-448049813954-us-east-1:$CODEBUILD_BUILD_NUMBER 448049813954.dkr.ecr.us-east-1.amazonaws.com/cdk-hnb659fds-container-assets-448049813954-us-east-1:$CODEBUILD_BUILD_NUMBER
+      - docker tag cdk-hnb659fds-container-assets-448049813954-us-east-1:$CODEBUILD_BUILD_NUMBER 448049813954.dkr.ecr.us-east-1.amazonaws.com/cdk-hnb659fds-container-assets-448049813954-us-east-1:latest
+
+  post_build:
+    commands:
+      - echo Completed build at `date`
+      - echo Pushing the Docker image...
+      - docker push 448049813954.dkr.ecr.us-east-1.amazonaws.com/cdk-hnb659fds-container-assets-448049813954-us-east-1:$CODEBUILD_BUILD_NUMBER
+      - docker push 448049813954.dkr.ecr.us-east-1.amazonaws.com/cdk-hnb659fds-container-assets-448049813954-us-east-1:latest
