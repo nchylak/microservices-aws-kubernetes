@@ -31,7 +31,7 @@ When a change is made to the main branch, an AWS CodeBuild project automatically
     kubectl apply -f deployment/coworking.yaml
     ```
 
-## Verify the Deployment
+## Verify the Deployment
 
 ```bash
 curl <EXTERNAL_IP>:5153/api/reports/daily_usage
@@ -39,7 +39,7 @@ curl <EXTERNAL_IP>:5153/api/reports/daily_usage
 
 Use `kubectl get svc` to find the external IP of the application.
 
-## Troubleshooting
+## Troubleshooting
 
 Check the application logs in AWS CloudWatch (under `containerinsights`) or, alternatively, inspect logs directly from a pod:
 
